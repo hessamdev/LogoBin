@@ -3,4 +3,20 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <color name="sefid">#fff</color>
+
+
+
+    <color name="c100">#FAFAFA</color>
+    <color name="c200">#F5F5F5</color>
+    <color name="c300">#E0E0E0</color>
+    <color name="c400">#BDBDBD</color>
+    <color name="c500">#9E9E9E</color>
+    <color name="c600">#757575</color>
+    <color name="c700">#616161</color>
+    <color name="c800">#424242</color>
+    <color name="c900">#212121</color>
+
 </resources>
