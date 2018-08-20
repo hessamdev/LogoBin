@@ -3,26 +3,30 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c100">
+    android:background="@color/c200">
     <LinearLayout
         android:id="@+id/toolbarMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/shadow2"
+        >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_margin="3dp"
             android:background="@drawable/stork_gray">
             <ImageView
+                android:id="@+id/Main_Imageview_Menu"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="5dp"
                 android:padding="10dp"
-                android:src="@drawable/menu"/>
+                android:contentDescription="@string/menu" />
             <ImageView
+                android:id="@+id/Main_Imageview_Search"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignParentLeft="true"
@@ -30,19 +34,14 @@
                 android:layout_marginStart="5dp"
                 android:layout_centerVertical="true"
                 android:padding="10dp"
-                android:src="@drawable/search"/>
+                android:contentDescription="@string/search" />
         </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/c300"
-            android:layout_below="@id/toolbarMain"
-            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:id="@+id/Main_Linear_Darkhastha"
@@ -56,6 +55,7 @@
                     android:id="@+id/Main_Imageview_Darkhastha"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+                    android:padding="2dp"
                     android:contentDescription="@string/darkhasthaman"
                     />
                 <TextView
@@ -75,13 +75,15 @@
                 android:gravity="center">
                 <ImageView
                     android:id="@+id/Main_Imageview_Dasteha"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="2dp"
                     android:contentDescription="@string/Dasteha"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="12sp"
                     android:text="@string/Dasteha"/>
             </LinearLayout>
 
@@ -95,13 +97,15 @@
                 android:gravity="center">
                 <ImageView
                     android:id="@+id/Main_Imageview_Safheasli"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="2dp"
                     android:contentDescription="@string/SafheAsli"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="12sp"
                     android:text="@string/SafheAsli"/>
             </LinearLayout>
 
@@ -110,12 +114,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/c300"
-        android:layout_below="@id/toolbarMain"
-        />
 
     <FrameLayout
         android:id="@+id/Container"

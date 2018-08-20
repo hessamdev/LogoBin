@@ -32,6 +32,10 @@ public class MainPage extends FragmentActivity {
     LinearLayout click_Safheasli;
     @BindView(R.id.Main_Imageview_Safheasli)
     ImageView Imageview_Safheasli;
+    @BindView(R.id.Main_Imageview_Search)
+    ImageView search;
+    @BindView(R.id.Main_Imageview_Menu)
+    ImageView menu;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +47,9 @@ public class MainPage extends FragmentActivity {
         click_Safheasli.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { Changepage(3); }});
         click_Dasteha.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { Changepage(2); }});
         click_Darkhast.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { Changepage(1); }});
+
+        Picasso.get().load(R.drawable.search).resize(100,100).into(search);
+        Picasso.get().load(R.drawable.menu).resize(100,100).into(menu);
 
 
 
