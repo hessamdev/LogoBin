@@ -5,4 +5,59 @@
     <string name="SafheAsli">صفحه اصلی</string>
     <string name="menu">menu</string>
     <string name="search">Search</string>
+    <string name="_0900000000">0900000000</string>
+    <string name="PhoneStiring">شماره همراه : الزامی</string>
+    <string name="Name">نام : </string>
+    <string name="Family">نام خانوادگی :</string>
+    <string name="Adress">نشانی دقیق :</string>
+
+    <string-array name="Ostan">
+        <item>"تهران"</item>
+        <item>"کرج"</item>
+        <item>"قزوین"</item>
+        <item>"شیراز"</item>
+        <item>"مشهد"</item>
+        <item>"رشت"</item>
+        <item>"قم"</item>
+        <item>"زنجان"</item>
+        <item>"مرکزی"</item>
+        <item>"آذربایجان غربی"</item>
+        <item>"آذربایجان غربی"</item>
+        <item>"آذربایجان غربی"</item>
+        <item>"آذربایجان غربی"</item>
+    </string-array>
+
+    <string-array name="Shahr">
+        <item>"تهران"</item>
+        <item>"کرج"</item>
+        <item>"قزوین"</item>
+        <item>"شیراز"</item>
+        <item>"مشهد"</item>
+        <item>"رشت"</item>
+        <item>"قم"</item>
+        <item>"زنجان"</item>
+        <item>"مرکزی"</item>
+        <item>"آذربایجان غربی"</item>
+        <item>"آذربایجان غربی"</item>
+        <item>"آذربایجان غربی"</item>
+        <item>"آذربایجان غربی"</item>
+    </string-array>
+
+    <string-array name="Mahale">
+        <item>"تهران"</item>
+        <item>"کرج"</item>
+        <item>"قزوین"</item>
+        <item>"شیراز"</item>
+        <item>"مشهد"</item>
+        <item>"رشت"</item>
+        <item>"قم"</item>
+        <item>"زنجان"</item>
+        <item>"مرکزی"</item>
+        <item>"آذربایجان غربی"</item>
+        <item>"آذربایجان غربی"</item>
+        <item>"آذربایجان غربی"</item>
+        <item>"آذربایجان غربی"</item>
+    </string-array>
+
+
 </resources>

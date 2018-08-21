@@ -58,6 +58,7 @@ public class MainPage extends FragmentActivity {
     }
 
     public void Changepage(int page){
+
         Picasso.get().load(R.drawable.call).resize(100,100).into(Imageview_Darkhastha);
         Picasso.get().load(R.drawable.categury).resize(50,50).into(Imageview_Dasteha);
         Picasso.get().load(R.drawable.home).resize(50,50).into(Imageview_Safheasli);

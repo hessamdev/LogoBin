@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+
+    <EditText
+        android:id="@+id/Register_Edittext_Phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textDirection="rtl"
+        android:layoutDirection="rtl"
+        android:gravity="right"
+        android:hint="@string/PhoneStiring"
+        android:background="@drawable/stork_gray"
+        android:ems="10"
+        android:inputType="phone" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/Register_Edittext_Family"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl"
+            android:gravity="right"
+            android:hint="@string/Family"
+            android:background="@drawable/stork_gray"
+            android:ems="10"
+            android:inputType="text" />
+        <EditText
+            android:id="@+id/Register_Edittext_Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl"
+            android:gravity="right"
+            android:hint="@string/Name"
+            android:background="@drawable/stork_gray"
+            android:ems="10"
+            android:inputType="text" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:id="@+id/Register_Textview_Mahale"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:background="@drawable/stork_gray"
+            android:gravity="center"
+            android:text="محله"
+            android:visibility="visible"
+            />
+        <TextView
+            android:id="@+id/Register_Textview_shahr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:background="@drawable/stork_gray"
+            android:gravity="center"
+            android:text="شهر"
+            />
+
+
+        <TextView
+            android:id="@+id/Register_Textview_Ostan"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:background="@drawable/stork_gray"
+            android:gravity="center"
+            android:text="استان"
+            />
+
+
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/Register_Edittext_Adress"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:padding="9dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textDirection="rtl"
+        android:layoutDirection="rtl"
+        android:gravity="right"
+        android:hint="@string/Adress"
+        android:lines="2"
+        android:minLines="2"
+        android:background="@drawable/stork_gray"
+        android:ems="10"
+        android:inputType="phone" />
+
+    <TextView
+        android:id="@+id/Register_Textview_Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/stork_gray"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:text="ثبت نام"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="17sp"/>
+
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/Register_Textview_Remember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="7dp"
+        android:text="قبلا ثبت نام کرده ام"
+        android:textColor="#001aff"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_marginBottom="7dp"
+        />
+</RelativeLayout>
