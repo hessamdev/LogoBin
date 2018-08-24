@@ -1,13 +1,13 @@
 package com.example.dev.logobin.fragment;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.view.View;
 
-public abstract class FragmentView
-{
+public abstract class FragmentView extends Fragment {
     public FragmentActivity Activity;
     public View ViewMain;
-    String Tag;
+    public String Tag;
 
     public abstract void OnCreate();
 

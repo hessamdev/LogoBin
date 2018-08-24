@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.dev.logobin.R;
 import com.example.dev.logobin.fragment.FragmentView;
@@ -16,8 +15,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DarkhastUI extends FragmentView {
@@ -51,20 +48,20 @@ public class DarkhastUI extends FragmentView {
 
     public void setdatalist(){
         listgozaresh =new ArrayList<>();
-        listgozaresh.add(new Model_Gozaresh(R.drawable.gooshtiran,"02:02","97/1/20"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.damdaran,"02:02","97/3/15"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.domino,"02:10","97/5/07"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.damdaran,"05:40","97/1/30"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.choopan,"02:20","97/2/20"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.chitoz,"21:02","97/1/20"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.haraz,"02:02","97/1/20"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.gooshtiran,"02:02","97/1/20"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.damdaran,"02:02","97/3/15"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.domino,"02:10","97/5/07"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.damdaran,"05:40","97/1/30"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.choopan,"02:20","97/2/20"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.chitoz,"21:02","97/1/20"));
-        listgozaresh.add(new Model_Gozaresh(R.drawable.haraz,"02:02","97/1/20"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_gooshtiran,"02:02","97/1/20"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_damdaran,"02:02","97/3/15"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_domino,"02:10","97/5/07"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_damdaran,"05:40","97/1/30"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_choopan,"02:20","97/2/20"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_chitoz,"21:02","97/1/20"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_haraz,"02:02","97/1/20"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_gooshtiran,"02:02","97/1/20"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_damdaran,"02:02","97/3/15"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_domino,"02:10","97/5/07"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_damdaran,"05:40","97/1/30"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_choopan,"02:20","97/2/20"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_chitoz,"21:02","97/1/20"));
+        listgozaresh.add(new Model_Gozaresh(R.drawable.b_haraz,"02:02","97/1/20"));
     }
 }
 class AdapterGozaresh extends RecyclerView.Adapter<AdapterGozaresh.ViewHolder>{

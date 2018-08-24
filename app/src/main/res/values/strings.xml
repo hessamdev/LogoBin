@@ -10,6 +10,7 @@
     <string name="Name">نام : </string>
     <string name="Family">نام خانوادگی :</string>
     <string name="Adress">نشانی دقیق :</string>
+    <string name="imageslider">imageslider</string>
 
     <string-array name="Ostan">
         <item>"تهران"</item>

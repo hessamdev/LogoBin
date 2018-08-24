@@ -1,7 +1,6 @@
 package com.example.dev.logobin.Register;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dev.logobin.R;
-import com.example.dev.logobin.activity.Register;
+
 
 
 public class RegisterPage extends Fragment{
