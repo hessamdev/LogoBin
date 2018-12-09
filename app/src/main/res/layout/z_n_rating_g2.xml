@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="45dp"
+    android:layout_height="45dp"
+    android:layout_gravity="center_horizontal|center_vertical"
+    android:gravity="center_vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_gravity="center_horizontal|center_vertical"
+        >
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center"
+
+            android:background="@drawable/dayere_rating"
+            android:textSize="10sp"
+            android:textColor="@color/c100"
+            android:text="3.5"/>
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:visibility="gone"
+            android:alpha="0.4"
+            android:src="@drawable/ic_star"/>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textColor="@color/c500"
+        android:text="امتیازدهی"/>
+
+</LinearLayout>

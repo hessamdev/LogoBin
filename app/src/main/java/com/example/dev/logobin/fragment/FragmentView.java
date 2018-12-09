@@ -1,6 +1,7 @@
 package com.example.dev.logobin.fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 

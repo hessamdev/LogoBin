@@ -3,10 +3,10 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <corners android:radius="30dp"/>
+    <corners android:radius="10dp"/>
     <solid android:color="@color/sefid"/>
 
-    <stroke android:color="#bababa"
+    <stroke android:color="@color/c200"
         android:width="1dp"
         />
 

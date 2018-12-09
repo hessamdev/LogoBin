@@ -12,7 +12,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
         android:padding="7dp"
-        android:textSize="17sp"
+        android:textSize="14sp"
         android:textColor="@color/c600"
         android:text="TextView"
          />

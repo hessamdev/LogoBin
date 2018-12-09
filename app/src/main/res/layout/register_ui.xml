@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="#fff"
+    android:orientation="vertical"
     >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/sayehpng"
+            />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:text="بامجی"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="لطفا مشخصات خود را به صورت کامل وارد نمایید."
+        android:padding="10dp"
+        android:textSize="12sp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal">
 
 
@@ -22,11 +57,17 @@
         android:layout_marginTop="10dp"
         android:textDirection="rtl"
         android:layoutDirection="rtl"
-        android:gravity="right"
+        android:gravity="center"
         android:hint="@string/PhoneStiring"
         android:background="@drawable/stork_gray"
-        android:ems="10"
         android:inputType="phone" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textSize="12sp"
+            android:layout_marginEnd="5dp"
+            android:text="لطفا نام و نام خانوادگی را به فارسی تایپ کنید."/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +83,7 @@
             android:layout_marginTop="10dp"
             android:textDirection="rtl"
             android:layoutDirection="rtl"
-            android:gravity="right"
+            android:gravity="center"
             android:hint="@string/Family"
             android:background="@drawable/stork_gray"
             android:ems="10"
@@ -58,35 +99,41 @@
             android:layout_marginTop="10dp"
             android:textDirection="rtl"
             android:layoutDirection="rtl"
-            android:gravity="right"
+            android:gravity="center"
             android:hint="@string/Name"
             android:background="@drawable/stork_gray"
             android:ems="10"
             android:inputType="text" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:gravity="center_vertical|center_horizontal"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         >
         <TextView
+
             android:id="@+id/Register_Textview_Mahale"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             android:padding="5dp"
             android:background="@drawable/stork_gray"
             android:gravity="center"
             android:text="محله"
-            android:visibility="visible"
+
             />
         <TextView
             android:id="@+id/Register_Textview_shahr"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:padding="5dp"
             android:background="@drawable/stork_gray"
@@ -101,6 +148,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             android:padding="5dp"
             android:background="@drawable/stork_gray"
             android:gravity="center"
@@ -113,7 +161,7 @@
     <EditText
         android:id="@+id/Register_Edittext_Adress"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content"
         android:padding="9dp"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
@@ -122,11 +170,10 @@
         android:layoutDirection="rtl"
         android:gravity="right"
         android:hint="@string/Adress"
-        android:lines="2"
+        android:lines="3"
         android:minLines="2"
         android:background="@drawable/stork_gray"
-        android:ems="10"
-        android:inputType="phone" />
+        android:inputType="textMultiLine" />
 
     <TextView
         android:id="@+id/Register_Textview_Register"
@@ -148,12 +195,24 @@
         android:id="@+id/Register_Textview_Remember"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
         android:padding="7dp"
         android:text="قبلا ثبت نام کرده ام"
         android:textColor="#001aff"
         android:textSize="12sp"
         android:gravity="center"
-        android:layout_marginBottom="7dp"
+
         />
-</RelativeLayout>
+
+    <Button
+        android:id="@+id/Register_Button_Remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff0000"
+        android:text="حذف حساب کاربری"
+        android:textColor="#fff"
+        android:textSize="15sp"
+        />
+
+</LinearLayout>
+</ScrollView>

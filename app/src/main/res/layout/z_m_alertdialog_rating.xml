@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_horizontal|center_vertical"
+    android:background="@drawable/dayereh_call">
+
+
+        <TextView
+            android:id="@+id/z_m_rating_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="70sp"
+            android:text="5"/>
+
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/z_m_rating_ratingbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_centerInParent="true"
+        app:mrb_fillBackgroundStars="true"
+        app:mrb_progressBackgroundTint="#fff"
+        app:mrb_progressTint="#ffe900"
+        android:rating="4"
+        android:numStars="5"
+
+         />
+
+        <Button
+            android:id="@+id/AlertRate_Button_Sabt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:text="ثبت امتیاز"/>
+
+
+
+</RelativeLayout>

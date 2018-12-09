@@ -12,6 +12,7 @@
         android:gravity="center"
         android:background="@drawable/shadow2"
         android:orientation="vertical"
+
         >
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="75dp"

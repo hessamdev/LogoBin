@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sefid">
+
+    <LinearLayout
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/sefid"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:baselineAligned="false"
+            >
+
+            <LinearLayout
+                android:id="@+id/Main_Linear_Menu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/Main_Imageview_Menu"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:alpha="0.4"
+                    android:padding="2dp"
+                    android:contentDescription="@string/darkhasthaman"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextView_smal"
+                    android:text="تنطیمات"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Main_Linear_Search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/Main_Imageview_Search"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:alpha="0.4"
+                    android:padding="2dp"
+                    android:contentDescription="@string/darkhasthaman"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextView_smal"
+                    android:text="جستجو"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Main_Linear_Darkhastha"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/Main_Imageview_Darkhastha"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:alpha="0.4"
+                    android:padding="2dp"
+                    android:contentDescription="@string/darkhasthaman"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextView_smal"
+                    android:text="@string/darkhasthaman"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/Main_Linear_Dasteha"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/Main_Imageview_Dasteha"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:alpha="0.4"
+                    android:padding="2dp"
+                    android:contentDescription="@string/Dasteha"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextView_smal"
+                    android:text="@string/Dasteha"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Main_Linear_Safheasli"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/Main_Imageview_Safheasli"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:alpha="0.4"
+                    android:padding="2dp"
+                    android:contentDescription="@string/SafheAsli"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextView_smal"
+                    android:text="@string/SafheAsli"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/Container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarMain"
+         />
+
+    <FrameLayout
+        android:id="@+id/ContainerFull"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+</RelativeLayout>

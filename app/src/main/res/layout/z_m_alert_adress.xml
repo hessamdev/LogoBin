@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/z_m_listview_alert"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     >
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="جستوجو"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/z_m_Recycler_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</ListView>
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

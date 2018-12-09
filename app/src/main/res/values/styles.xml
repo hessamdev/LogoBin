@@ -8,4 +8,31 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="customRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar</item>
+        <item name="android:maxHeight">50dp</item>
+        <item name="android:minHeight">50dp</item>
+
+    </style>
+
+    <style name="TextView_normal">
+        <item name="fontPath">fonts/iransansweb.ttf</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/c500</item>
+    </style>
+
+    <style name="TextView_smal">
+        <item name="fontPath">fonts/iransansweb.ttf</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/c500</item>
+    </style>
+
+    <style name="TextView_ultralight">
+        <item name="fontPath">fonts/iranfont_ultralight.ttf</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
+
+
 </resources>

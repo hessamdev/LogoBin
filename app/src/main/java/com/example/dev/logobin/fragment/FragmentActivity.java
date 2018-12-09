@@ -1,10 +1,14 @@
 package com.example.dev.logobin.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 public abstract class FragmentActivity extends AppCompatActivity
 {
@@ -13,6 +17,7 @@ public abstract class FragmentActivity extends AppCompatActivity
     private FragmentManager Manager;
     private String Permission;
 
+
     public FragmentManager GetManager()
     {
         if (Manager == null)
@@ -20,6 +25,7 @@ public abstract class FragmentActivity extends AppCompatActivity
 
         return Manager;
     }
+
 
     @Override
     public void onBackPressed()
@@ -47,6 +53,7 @@ public abstract class FragmentActivity extends AppCompatActivity
         }
 
         GetManager().OnResume();
+
     }
 
     @Override
@@ -85,4 +92,6 @@ public abstract class FragmentActivity extends AppCompatActivity
     {
         void OnPermission(boolean Result);
     }
+
+
 }

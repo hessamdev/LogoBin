@@ -1,14 +1,20 @@
 package com.example.dev.logobin.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import com.example.dev.logobin.R;
+import com.example.dev.logobin.activity.MainPage;
+import com.example.dev.logobin.activity.NoInternet;
 
 public class FragmentManager
 {
@@ -16,13 +22,15 @@ public class FragmentManager
     private FragmentActivity Activity;
     private FragmentView CurrentFrag;
 
-    FragmentManager(FragmentActivity a)
+    public FragmentManager(FragmentActivity a)
     {
         Activity = a;
     }
 
     public void OpenView(FragmentView Frag, String Tag, boolean Full)
     {
+        if (isNetworkAvailable()){
+
         if (CurrentFrag != null && CurrentFrag.Tag.equals(Tag))
         {
             CurrentFrag.OnOpen();
@@ -52,10 +60,16 @@ public class FragmentManager
         }
 
         FragmentList.add(CurrentFrag);
+    }else {
+            Intent intent=new Intent(Activity,NoInternet.class);
+            Activity.onPause();
+            Activity.startActivity(intent);
+        }
     }
-
     boolean HandleBack()
     {
+        if (isNetworkAvailable()){
+
         if (FragmentList.size() > 1)
         {
             FragmentView Frag = FragmentList.get(FragmentList.size() - 1);
@@ -84,6 +98,12 @@ public class FragmentManager
         }
 
         return true;
+    }else {
+            Intent intent=new Intent(Activity,NoInternet.class);
+            Activity.startActivity(intent);
+
+            return false;
+        }
     }
 
     @Nullable
@@ -117,5 +137,12 @@ public class FragmentManager
     {
         if (CurrentFrag != null)
             CurrentFrag.OnActivityResult(RequestCode, ResultCode, intent);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) Activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

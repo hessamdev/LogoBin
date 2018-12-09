@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">LogoBin</string>
-    <string name="darkhasthaman">درخواست های من</string>
+    <string name="app_name">Satrapp</string>
+    <string name="darkhasthaman">درخواست ها</string>
     <string name="Dasteha">دسته ها</string>
     <string name="SafheAsli">صفحه اصلی</string>
     <string name="menu">menu</string>
     <string name="search">Search</string>
     <string name="_0900000000">0900000000</string>
     <string name="PhoneStiring">شماره همراه : الزامی</string>
-    <string name="Name">نام : </string>
-    <string name="Family">نام خانوادگی :</string>
+    <string name="Name">نام </string>
+    <string name="Family">نام خانوادگی</string>
     <string name="Adress">نشانی دقیق :</string>
     <string name="imageslider">imageslider</string>
 

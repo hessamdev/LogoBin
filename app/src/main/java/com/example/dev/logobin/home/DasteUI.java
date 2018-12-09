@@ -1,48 +1,61 @@
 package com.example.dev.logobin.home;
 
+import android.app.ProgressDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import com.android.volley.toolbox.Volley;
 import com.example.dev.logobin.R;
 import com.example.dev.logobin.fragment.FragmentView;
 import com.example.dev.logobin.model.Dastebandi;
 import com.example.dev.logobin.model.Dastebandi_zirdaste;
+
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class DasteUI extends FragmentView {
 
-//    @BindView(R.id.Dastebandi_Recyclerview)
-//    RecyclerView recyclerViewDastebandi;
     private Adapter_Dastebandi adapter_dastebandi;
     private ArrayList<Dastebandi_zirdaste> zirmenu;
-
+    private RecyclerView recyclerViewDastebandi;
+    String Url ="http://programiner.com/api/lists.php";
 
     @Override
     public void OnCreate() {
-        View view = View.inflate(Activity, R.layout.daste_ui,null);
+        View view = View.inflate(Activity, R.layout.home_daste_ui,null);
+
+         recyclerViewDastebandi= (RecyclerView) view.findViewById(R.id.Dastebandi_Recyclerview);
+
+//        setZirmenu();
+
+        GetDataOnline();
 
 
-        RecyclerView recyclerViewDastebandi = (RecyclerView) view.findViewById(R.id.Dastebandi_Recyclerview);
-
-        getZirmenu();
-
-        adapter_dastebandi=new Adapter_Dastebandi(zirmenu);
         recyclerViewDastebandi.setLayoutManager(new LinearLayoutManager(Activity));
 
-        recyclerViewDastebandi.setAdapter(adapter_dastebandi);
+
 
 
 
@@ -51,7 +64,58 @@ public class DasteUI extends FragmentView {
 
     }
 
-    public void getZirmenu() {
+
+    public void GetDataOnline(){
+
+        final ProgressDialog  progressDialog=new ProgressDialog(Activity);
+        progressDialog.setTitle("Loading...");
+        progressDialog.show();
+
+        JsonObjectRequest objectRequest=new JsonObjectRequest(Request.Method.GET, Url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("JsonObject",response.toString());
+                        zirmenu=new ArrayList<>();
+
+                        try {
+                            JSONArray Data=response.getJSONArray("data");
+                            Log.i("Json array DATA",Data.toString());
+                            ArrayList<Dastebandi> dastebandis;
+                            for (int i = 0 ;i < Data.length();i++){
+                                JSONObject data=Data.getJSONObject(i);
+                                JSONArray Sublist=data.getJSONArray("sublists");
+                                dastebandis=new ArrayList<>();
+                                for (int b=0 ;b < Sublist.length() ; b++){
+                                    JSONObject sublist=Sublist.getJSONObject(b);
+                                        dastebandis.add(new Dastebandi(sublist.getString("title")));
+                                }
+                                zirmenu.add(new Dastebandi_zirdaste(data.getString("title"),dastebandis));
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("eroordata",e.toString());
+                        }
+                        adapter_dastebandi=new Adapter_Dastebandi(zirmenu);
+                        recyclerViewDastebandi.setAdapter(adapter_dastebandi);
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Voly eror",error.toString());
+                progressDialog.dismiss();
+
+            }
+        });
+        RequestQueue requestQueue= Volley.newRequestQueue(Activity);
+        requestQueue.add(objectRequest);
+        progressDialog.dismiss();
+    }
+
+    public void setZirmenu() {
 
         zirmenu=new ArrayList<>();
 
