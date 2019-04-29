@@ -1,23 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
-
+    android:background="#FFF"
+    android:gravity="center"
+    android:layout_gravity="center"
     >
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#fff"
-        android:text="Getdata"
-        android:textStyle="bold"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:textSize="50sp"
+        android:orientation="vertical"
+        android:gravity="center"
 
+        >
+    <ImageView
+        android:id="@+id/image_logo_loading"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        tools:ignore="ContentDescription" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Shoar"
+            android:layout_marginTop="170dp"
+            style="@style/TextView_normal"
+            />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/Container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarMain"
         />
 
+    <FrameLayout
+        android:id="@+id/ContainerFull"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

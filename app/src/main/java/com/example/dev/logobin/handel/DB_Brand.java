@@ -25,7 +25,9 @@ public class DB_Brand {
         public long insertData(String ID,
                                String Title,
                                String Rate,
-                               String Url_Image)
+                               String Url_Image,
+                               String Type
+                               )
         {
 
             SQLiteDatabase dbb = myhelper.getWritableDatabase();
@@ -34,14 +36,18 @@ public class DB_Brand {
             contentValues.put(myDbHelper.Title, Title);
             contentValues.put(myDbHelper.Rate, Rate);
             contentValues.put(myDbHelper.URl_Image,Url_Image);
+            contentValues.put(myDbHelper.Type,Type);
             long id = dbb.insert(myDbHelper.TABLE_NAME, null , contentValues);
-            Log.i("DatabaseBrand","Insert");
+//            Log.i("DatabaseBrand","Insert");
+            dbb.close();
             return id;
         }
 
-        public ArrayList<M_Brand>  getData()
+        public ArrayList<M_Brand>  getData(String Type)
         {
             SQLiteDatabase db = myhelper.getWritableDatabase();
+            String where= myDbHelper.Type+ " = ? ";
+            String[] whereArg={Type};
             String[] columns = {
                     myDbHelper.UID,
                     myDbHelper.ID,
@@ -49,20 +55,20 @@ public class DB_Brand {
                     myDbHelper.Rate,
                     myDbHelper.URl_Image,
             };
-            Cursor cursor =db.query(myDbHelper.TABLE_NAME,columns,null,null,null,null,null);
+            Cursor cursor =db.query(myDbHelper.TABLE_NAME,null,where,whereArg,null,null,null);
             ArrayList<M_Brand> ListBrand=new ArrayList<>();
             while (cursor.moveToNext())
             {
                 int cid =cursor.getInt(cursor.getColumnIndex(myDbHelper.UID));
                 String Sid =cursor.getString(cursor.getColumnIndex(myDbHelper.ID));
-                int id= Integer.parseInt(Sid);
                 String  title =cursor.getString(cursor.getColumnIndex(myDbHelper.Title));
                 String  rate =cursor.getString(cursor.getColumnIndex(myDbHelper.Rate));
                 String  url_image =cursor.getString(cursor.getColumnIndex(myDbHelper.URl_Image));
-                ListBrand.add(new M_Brand(id,title,rate,url_image));
+                ListBrand.add(new M_Brand(Sid,title,rate,url_image));
             }
-//            cursor.close();
             Log.i("DatabaseBrand","Get");
+            cursor.close();
+            db.close();
             return ListBrand;
         }
 //Delete_Update
@@ -108,6 +114,7 @@ public class DB_Brand {
             private static final String Title = "title";
             private static final String Rate = "mrate";
             private static final String URl_Image = "url_image";
+            private static final String Type = "Type";
 
 
             private static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+
@@ -115,7 +122,8 @@ public class DB_Brand {
                     + ID +" VARCHAR(255) ,"
                     + Title +" VARCHAR(255) ,"
                     + Rate +" VARCHAR(255) ,"
-                    + URl_Image +" VARCHAR(255));";
+                    + URl_Image +" VARCHAR(255) ,"
+                    + Type +" VARCHAR(255));";
             private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_NAME;
             private Context context;
 

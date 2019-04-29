@@ -2,34 +2,24 @@ package com.example.dev.logobin.model;
 
 public class M_Brand {
 
-    int Uid;
-    int id;
+    String id;
     String title;
     String rate;
     String image;
 
 
-    public M_Brand( int id, String title, String rate, String image) {
-
+    public M_Brand(String id, String title, String rate, String image) {
         this.id = id;
         this.title = title;
         this.rate = rate;
         this.image = image;
     }
 
-    public int getUid() {
-        return Uid;
-    }
-
-    public void setUid(int uid) {
-        Uid = uid;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

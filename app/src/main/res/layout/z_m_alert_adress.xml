@@ -2,14 +2,24 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@color/sefid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+
     >
     <EditText
+        android:id="@+id/z_m_alertAdres_Edittext_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="جستوجو"
+        android:padding="7dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginStart="7dp"
+        android:textSize="14sp"
+        android:background="@drawable/stork_gray"
+        android:textColorHint="@color/c400"
+        android:hint="جستجو"
         />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/z_m_Recycler_alert"

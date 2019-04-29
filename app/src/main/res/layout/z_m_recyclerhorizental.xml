@@ -1,49 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="#ffffff">
 
-    <TextView
-        android:id="@+id/z_m_recycler_Titel"
-        style="@style/TextView_normal"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/z_m_recycler_Relative_all"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:text="نام و مشخصات"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="3dp"
+        >
 
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/TextView_normal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="همه"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/z_m_recycler_Titel"
+            style="@style/TextView_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="نام و مشخصات"
+            android:layout_alignParentEnd="true"
+
+            />
+
+        <TextView
+            android:id="@+id/z_m_recycler_Titel_all"
+            style="@style/TextView_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/imageView_All"
+            android:text="همه"
+
+            />
+
+        <ImageView
+            android:id="@+id/imageView_All"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_alignParentStart="true"
+            android:alpha="0.4"
+            android:src="@drawable/forward_arrow" />
+
+    </RelativeLayout>
+
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerHorizontall"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/z_m_recycler_Titel" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="13dp"
-        android:layout_height="13dp"
-        android:layout_marginStart="16dp"
-        android:alpha="0.4"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:srcCompat="@drawable/forward_arrow" />
-</android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/Recyclerhorizental_view_gone"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            >
+            <ImageView
+                android:visibility="gone"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/alert_new"
+                android:alpha="0.5"
+            />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c500"
+                android:gravity="center"
+                android:background="@drawable/back_reg_gray"
+                android:padding="5dp"
+                android:textSize="15sp"
+                android:layout_marginStart="10dp"
+                android:text="درحال حاضر تامین کننده ای برای محله شما وجود ندارد!"
+                />
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+</LinearLayout>

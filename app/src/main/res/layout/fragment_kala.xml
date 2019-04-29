@@ -22,20 +22,31 @@
             android:layout_alignParentEnd="true"
             />
 
-        <TextView
-            android:id="@+id/Kala_Textview_NameKala"
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:id="@+id/kala_scroll_title"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:lines="1"
-            android:paddingStart="7dp"
-            android:paddingEnd="57dp"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:textColor="@color/c400"
-            android:layoutDirection="ltr"
-            android:gravity="center_vertical"
-            tools:ignore="RtlSymmetry" />
+            android:layout_toStartOf="@id/Kala_Imageview_Back"
+            android:scrollbars="none"
+            >
+
+            <TextView
+                android:id="@+id/Kala_Textview_NameKala"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:foregroundGravity="right"
+                android:lines="1"
+                android:textSize="15sp"
+                android:textColor="@color/c400"
+                android:layoutDirection="ltr"
+                android:gravity="center_vertical|end"
+                tools:ignore="RtlSymmetry" />
+
+        </HorizontalScrollView>
+
+
 
     </RelativeLayout>
     <ScrollView
@@ -57,6 +68,7 @@
             android:id="@+id/Kala_Imageview_Heder"
             android:layout_width="200dp"
             android:layout_height="200dp"
+            android:padding="3dp"
             android:layout_gravity="center"
             android:foregroundGravity="center"
             />
@@ -65,8 +77,6 @@
                 android:layout_height="200dp"
                 android:background="@drawable/sayehpng"
                 android:layout_marginBottom="1dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginStart="15dp"
                 android:layout_marginTop="1dp"/>
 
 

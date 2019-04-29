@@ -33,7 +33,6 @@
                     android:id="@+id/Main_Imageview_Menu"
                     android:layout_width="23dp"
                     android:layout_height="23dp"
-                    android:alpha="0.4"
                     android:padding="2dp"
                     android:contentDescription="@string/darkhasthaman"
                     />
@@ -57,7 +56,6 @@
                     android:id="@+id/Main_Imageview_Search"
                     android:layout_width="23dp"
                     android:layout_height="23dp"
-                    android:alpha="0.4"
                     android:padding="2dp"
                     android:contentDescription="@string/darkhasthaman"
                     />
@@ -81,7 +79,6 @@
                     android:id="@+id/Main_Imageview_Darkhastha"
                     android:layout_width="23dp"
                     android:layout_height="23dp"
-                    android:alpha="0.4"
                     android:padding="2dp"
                     android:contentDescription="@string/darkhasthaman"
                     />
@@ -128,7 +125,6 @@
                     android:id="@+id/Main_Imageview_Safheasli"
                     android:layout_width="23dp"
                     android:layout_height="23dp"
-                    android:alpha="0.4"
                     android:padding="2dp"
                     android:contentDescription="@string/SafheAsli"
                     />

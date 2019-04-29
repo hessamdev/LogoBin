@@ -8,19 +8,28 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.dev.logobin.R;
 import com.example.dev.logobin.fragment.FragmentActivity;
+import com.squareup.picasso.Picasso;
 
 public class NoInternet extends FragmentActivity {
 
     private Handler handler ;
+    private  Runnable runnable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nointernet);
+
+        ImageView imageinternet=(ImageView)findViewById(R.id.NoInternet_Imageview);
+        Picasso.get().load(R.drawable.nointernet).resize(300,300).into(imageinternet);
+
 
     }
 
@@ -34,12 +43,16 @@ public class NoInternet extends FragmentActivity {
     @Override
     public void onBackPressed() {
         if (isNetworkAvailable()) {
-            super.onBackPressed();
+//            super.onBackPressed();
+            finish();
         } else {
+
             Intent startMain = new Intent(Intent.ACTION_MAIN);
             startMain.addCategory(Intent.CATEGORY_HOME);
             startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(startMain);
+            finish();
+
         }
     }
 
@@ -49,17 +62,25 @@ public class NoInternet extends FragmentActivity {
 
         handler=new Handler();
 
-        final Runnable r=new Runnable() {
-            @Override
-            public void run() {
-                if (isNetworkAvailable()){
-                    onBackPressed();
-                    handler.postDelayed(this,500);
-                }
 
-            }
-        };
-        handler.postDelayed(r,500);
+            runnable=new Runnable() {
+                @Override
+                public void run() {
+                    Log.i("Nointernet",""+isNetworkAvailable());
+                    if (isNetworkAvailable()){
+                        onBackPressed();
+                    }else {
+                        handler.postDelayed(this,500);
+                    }
+
+
+                }
+            };
+            handler.postDelayed(runnable,500);
+
+
+
+
 
     }
 }

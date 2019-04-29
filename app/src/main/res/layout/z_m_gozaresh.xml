@@ -7,6 +7,7 @@
     android:layout_marginTop="5dp"
     android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
+    android:layout_marginBottom="2dp"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -15,17 +16,57 @@
         android:orientation="horizontal"
         >
 
-        <RelativeLayout
-            android:id="@+id/z_model_gozaresh_Relative_Rate"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
 
-            >
+            <LinearLayout
+                android:id="@+id/z_m_gozaresh_Linear_Rate"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="center"
+                    android:padding="3dp">
+
+                    <FrameLayout
+                        android:layout_width="21dp"
+                        android:layout_height="21dp"
+                        android:background="@drawable/dayere"
+                        android:foregroundGravity="center">
+
+                        <TextView
+                            android:id="@+id/z_n_Textview_rate"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textColor="@color/c400"
+                            android:textSize="12sp" />
+
+                    </FrameLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/TextView_smal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="امتیازدهی" />
+
+
+            </LinearLayout>
+
+
+
+
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/z_model_gozaresh_Relative_Gozaresh"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -50,12 +91,25 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_vertical|center_horizontal"
             >
+
             <TextView
+                android:id="@+id/z_m_gozaresh_textview_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/relative_image_darkhst"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textColor="@color/c500"
+                android:textSize="12sp"
+                />
+            <TextView
+
                 android:id="@+id/z_model_gozaresh_textview_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,6 +121,7 @@
                 />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/z_model_gozaresh_textview_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,11 +132,15 @@
         </LinearLayout>
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_height="wrap_content">
         <RelativeLayout
+            android:id="@+id/relative_image_darkhst"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginEnd="3dp"
@@ -100,7 +159,8 @@
                 android:layout_height="match_parent"
                 android:padding="3dp" />
         </RelativeLayout>
-        </RelativeLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

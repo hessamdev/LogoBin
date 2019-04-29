@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:ignore="ContentDescription"
+    >
+
+        <LinearLayout
+            android:id="@+id/Register_Linear_view"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/Register_Imageview_Back"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/back_arrow"
+                    android:padding="17dp"
+                    android:layout_alignParentEnd="true"
+                    />
+
+
+
+            </RelativeLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="10dp"
+                    android:text="حذف حساب"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:textColor="#e6c0c0"
+                    />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/porofile"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:padding="5dp"
+                    android:layout_marginBottom="30dp"
+                    />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15dp"
+                android:text="نام کاربری"
+                />
+
+
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/Register_Edittext_Phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:background="@drawable/stork_gray"
+                android:padding="10dp"
+                android:ems="11"
+                android:maxEms="11"
+                android:minEms="11"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:hint="شماره خود را وارد کنید"
+                />
+
+            <EditText
+                android:id="@+id/Register_Edittext_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stork_gray"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:hint="نام کاربری"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="40dp"
+                >
+                <TextView
+
+                    android:id="@+id/Register_Textview_Mahale"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/stork_gray"
+                    android:gravity="center"
+                    android:text="محله"
+
+                    />
+                <TextView
+                    android:id="@+id/Register_Textview_shahr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:background="@drawable/stork_gray"
+                    android:gravity="center"
+                    android:text="شهر"
+                    />
+
+
+                <TextView
+                    android:id="@+id/Register_Textview_Ostan"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/stork_gray"
+                    android:gravity="center"
+                    android:text="استان"
+                    />
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/Register_Linear_Ghavanin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center|center_vertical"
+                android:padding="20dp"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" را می پذیرم."
+
+                    android:layout_gravity="right"
+                    />
+                <TextView
+                    android:id="@+id/Register_Textview_Ghavanin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="مقررات "
+                    android:textColor="#4fb96f"
+                    android:layout_gravity="right"
+                    />
+                <ImageView
+                    android:id="@+id/register_imageview_verfired"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginLeft="7dp"
+                    />
+
+
+            </LinearLayout>
+
+
+
+
+            <TextView
+                android:id="@+id/TextView_Register_sinup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/c500"
+                android:layout_marginTop="50dp"
+                android:text="ثبت"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:paddingTop="5sp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/back_reg_gray"
+                />
+
+
+            <TextView
+                android:id="@+id/Register_Textview_Removeacc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:lines="1"
+                android:layout_marginStart="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:background="@drawable/back_reg_gray"
+                android:textColor="@color/c500"
+                android:layoutDirection="ltr"
+                android:gravity="center_vertical"
+                tools:ignore="RtlSymmetry"
+                android:text="حذف حساب کاربری"/>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+</ScrollView>

@@ -3,8 +3,8 @@
     android:id="@+id/z_m_RecyclerBrand_Constrain"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="100dp"
+    android:layout_height="160dp"
     >
 
     <RelativeLayout
@@ -37,7 +37,8 @@
                 android:id="@+id/z_model_recyclerBrand_Imageview_Saye"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/sayehpng" />
+
+                android:contentDescription="@string/todo" />
 
         </RelativeLayout>
 
@@ -54,11 +55,9 @@
                 android:gravity="center"
                 android:textSize="12sp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <LinearLayout
+
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -81,7 +80,30 @@
                         android:alpha="0.4"
                         android:background="@drawable/ic_star" />
                 </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="3dp"
+                >
+                <TextView
+                android:id="@+id/z_model_recyclerBrand_Textview_tab"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/back_reg_gray"
+                android:layout_gravity="center"
+
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:textSize="9sp"
+                android:textColor="#000"
+                android:text="تب"
+                />
             </RelativeLayout>
+
+
         </LinearLayout>
     </RelativeLayout>
 

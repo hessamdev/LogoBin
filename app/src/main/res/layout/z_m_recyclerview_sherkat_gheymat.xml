@@ -26,6 +26,8 @@
             android:layout_width="90dp"
             android:layout_height="90dp">
 
+
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/z_model_recyclerSherkat_ImageView_Sherkat"
                 android:layout_width="match_parent"
@@ -38,6 +40,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/sayehpng" />
+
+            <View
+                android:id="@+id/z_model_recyclerSherkat_view_online"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:background="@drawable/circle_gray_kala"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"/>
 
         </RelativeLayout>
 
@@ -95,6 +107,131 @@
                     android:textSize="11sp"
                     android:padding="2dp"
                     android:text="لحظاتی پیش"/>
+
+                <RelativeLayout
+                    android:id="@+id/z_model_recyclerSherkat_Relative_ExpendView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/arrow_down"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="10dp"
+                        />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:visibility="invisible"
+                    android:id="@+id/z_model_recyclerBrand_Linear_Expend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c400"
+                    android:gravity="center"
+                    android:textSize="11sp"
+                    android:padding="2dp"
+                    android:text="نحوه ارائه :"/>
+
+                <TextView
+                    android:id="@+id/z_model_recyclerSherkat_Textview_pack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c400"
+                    android:gravity="center"
+                    android:textSize="11sp"
+                    android:padding="2dp"
+                    android:text="باکس"/>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c400"
+                    android:gravity="center"
+                    android:textSize="11sp"
+                    android:padding="2dp"
+                    android:text="واحد :"/>
+
+                <TextView
+                    android:id="@+id/z_model_recyclerSherkat_Textview_unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c400"
+                    android:gravity="center"
+                    android:textSize="11sp"
+                    android:padding="2dp"
+                    android:text="کیلوگرم"/>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c400"
+                    android:gravity="center"
+                    android:textSize="11sp"
+                    android:padding="2dp"
+                    android:text="حداقل سفارش :"/>
+
+                <TextView
+                    android:id="@+id/z_model_recyclerSherkat_Textview_minimum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c400"
+                    android:gravity="center"
+                    android:textSize="11sp"
+                    android:padding="2dp"
+                    android:text="3"/>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c400"
+                    android:gravity="center"
+                    android:textSize="11sp"
+                    android:padding="2dp"
+                    android:text="ویژه :"/>
+
+                <TextView
+                    android:id="@+id/z_model_recyclerSherkat_Textview_customers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c400"
+                    android:gravity="center"
+                    android:textSize="11sp"
+                    android:padding="2dp"
+                    android:text="کسب کار ها"/>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c400"
+                    android:gravity="center"
+                    android:textSize="11sp"
+                    android:padding="2dp"
+                    android:text="هزینه ارسال :"/>
+
+                <TextView
+                    android:id="@+id/z_model_recyclerSherkat_Textview_cost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c400"
+                    android:gravity="center"
+                    android:textSize="11sp"
+                    android:padding="2dp"
+                    android:text="رایگان"/>
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

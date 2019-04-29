@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center"
     >
-<RelativeLayout
+    <RelativeLayout
     android:id="@+id/toprelative"
     android:layout_width="200dp"
     android:layout_height="200dp">
@@ -23,9 +23,19 @@
         android:id="@+id/z_model_recyclerBrand_Imageview_Saye"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/imagekala"
         android:src="@drawable/sayehpng"
 
         />
+        <View
+            android:id="@+id/z_model_recyclerKala_view_company"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/circle_blue_kala"/>
 </RelativeLayout>
     <LinearLayout
         android:layout_width="200dp"
@@ -33,6 +43,18 @@
         android:layout_below="@id/toprelative"
         android:orientation="vertical"
         android:layout_marginBottom="3dp">
+
+        <TextView
+            android:id="@+id/z_model_recyclerKala_Textview_Gheymat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:textColor="@color/c600"
+
+            />
+
         <TextView
             android:id="@+id/z_model_recyclerKala_Textview_name"
             android:layout_width="match_parent"
@@ -45,14 +67,7 @@
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
            />
-        <TextView
-            android:id="@+id/z_model_recyclerKala_Textview_Gheymat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:gravity="center"
-            android:textColor="#16c100"
-            />
+
 
     </LinearLayout>
 

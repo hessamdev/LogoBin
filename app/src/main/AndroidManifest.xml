@@ -8,12 +8,13 @@
     <application
         android:allowBackup="true"
         android:name=".App"
-        android:icon="@drawable/logo"
+        android:icon="@mipmap/new_legacy"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo21"
+        android:roundIcon="@mipmap/new_legacy"
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="true"
+        android:largeHeap="true"
         >
         <activity android:name=".activity.Getdata" android:screenOrientation="portrait">
             <intent-filter>
@@ -21,9 +22,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+            <data android:scheme="http" android:host="satrapp.ir" />
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.NoInternet" android:screenOrientation="portrait"/>
         <activity android:name=".activity.MainPage" android:screenOrientation="portrait"/>
+
+
+
     </application>
 
 </manifest>

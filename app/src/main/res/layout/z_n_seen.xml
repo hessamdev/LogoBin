@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sherkat_Linear_share"
+    android:layout_width="50dp"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical">
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dayere"
+            android:foregroundGravity="center">
+            <TextView
+                android:id="@+id/z_n_Textview_seen"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="2dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/c400"
+                />
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textSize="10sp"
+        android:gravity="center"
+        android:textColor="@color/c400"
+        android:text="آمار بازدید"/>
+
+
+    </LinearLayout>
+
+
+
+

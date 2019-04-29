@@ -11,54 +11,15 @@
     <string name="Family">نام خانوادگی</string>
     <string name="Adress">نشانی دقیق :</string>
     <string name="imageslider">imageslider</string>
-
-    <string-array name="Ostan">
-        <item>"تهران"</item>
-        <item>"کرج"</item>
-        <item>"قزوین"</item>
-        <item>"شیراز"</item>
-        <item>"مشهد"</item>
-        <item>"رشت"</item>
-        <item>"قم"</item>
-        <item>"زنجان"</item>
-        <item>"مرکزی"</item>
-        <item>"آذربایجان غربی"</item>
-        <item>"آذربایجان غربی"</item>
-        <item>"آذربایجان غربی"</item>
-        <item>"آذربایجان غربی"</item>
-    </string-array>
-
-    <string-array name="Shahr">
-        <item>"تهران"</item>
-        <item>"کرج"</item>
-        <item>"قزوین"</item>
-        <item>"شیراز"</item>
-        <item>"مشهد"</item>
-        <item>"رشت"</item>
-        <item>"قم"</item>
-        <item>"زنجان"</item>
-        <item>"مرکزی"</item>
-        <item>"آذربایجان غربی"</item>
-        <item>"آذربایجان غربی"</item>
-        <item>"آذربایجان غربی"</item>
-        <item>"آذربایجان غربی"</item>
-    </string-array>
-
-    <string-array name="Mahale">
-        <item>"تهران"</item>
-        <item>"کرج"</item>
-        <item>"قزوین"</item>
-        <item>"شیراز"</item>
-        <item>"مشهد"</item>
-        <item>"رشت"</item>
-        <item>"قم"</item>
-        <item>"زنجان"</item>
-        <item>"مرکزی"</item>
-        <item>"آذربایجان غربی"</item>
-        <item>"آذربایجان غربی"</item>
-        <item>"آذربایجان غربی"</item>
-        <item>"آذربایجان غربی"</item>
-    </string-array>
+    <string name="call">درخواست</string>
+    <string name="todo">TODO</string>
+    <string name="Shoar">سامانه هوشمند مراکز تماس</string>
+    <string name="imagekala">ImageKala</string>
+    <string name="back">Back</string>
+    <string name="tabligh">Tabligh</string>
+    <string name="sayeh">Sayeh</string>
+    <string name="speech_prompt"><![CDATA[به دنبال چه میگردید ؟]]></string>
+    <string name="speech_not_supported">Sorry! Your device doesn\\\'t support speech input</string>
 
 
 </resources>

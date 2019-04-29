@@ -1,42 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:clickable="true"
+    android:orientation="vertical"
     android:background="#FFFFFF">
+
     <RelativeLayout
+        android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-
-        android:padding="5dp"
-        android:layout_margin="10dp"
+        android:layout_height="37dp"
         >
+        <RelativeLayout
+            android:id="@+id/search_relative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/stork_gray"
+            android:layout_toEndOf="@id/search_imageview_dastebandi"
+            android:padding="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            >
 
+        <EditText
+            android:id="@+id/Search_EditText_search2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/Search_Imageview_Mic"
+            android:background="@color/sefid"
+            android:textSize="15sp"
+            android:padding="2dp"
+            android:inputType="textFilter"
+            android:imeOptions="actionSearch"
+            android:hint="جستجو"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            />
         <ImageView
-            android:id="@+id/Search_Imageview_search"
+            android:id="@+id/Search_Imageview_Mic"
             android:layout_width="23dp"
             android:layout_height="23dp"
-            android:src="@drawable/search"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/mic"
+            android:alpha="0.4"
+
             />
-        <EditText
-            android:id="@+id/Search_EditText_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/Search_Imageview_search"
-            android:padding="5dp"
-            android:layout_marginEnd="10dp"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
-            android:background="#ffffff"
-            android:hint=" جستجو "
-            android:textColorHint="@color/c300"
+        </RelativeLayout>
+
+
+
+        <ImageView
+            android:id="@+id/search_imageview_dastebandi"
+            android:layout_width="37dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="9dp"
+            android:padding="10dp"
+            android:background="@drawable/stork_gray"
+            android:src="@drawable/categury"
+            android:alpha="0.4"
+
             />
 
 
     </RelativeLayout>
 
-</RelativeLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_recycler_Brand"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_recycler_Kala"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</LinearLayout>
+
+
+
+</LinearLayout>

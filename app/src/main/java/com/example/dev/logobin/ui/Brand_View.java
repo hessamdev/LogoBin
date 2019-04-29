@@ -1,51 +1,41 @@
 package com.example.dev.logobin.ui;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.Button;
+import android.view.Window;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.dev.logobin.App;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.example.dev.logobin.Network.GetDastebandi;
 import com.example.dev.logobin.Network.GetKala;
+import com.example.dev.logobin.Network.PostBrand;
 import com.example.dev.logobin.R;
 import com.example.dev.logobin.RecyclerApp.RecyclerKala;
 import com.example.dev.logobin.fragment.FragmentView;
 import com.example.dev.logobin.handel.Adapter_Daste_Brand;
-import com.example.dev.logobin.handel.DB_Kala;
-import com.example.dev.logobin.handel.DB_ZirDaste;
+import com.example.dev.logobin.handel.Create_Alert;
+import com.example.dev.logobin.handel.User_Data;
 import com.example.dev.logobin.model.M_Kala;
 import com.example.dev.logobin.model.M_ZirDaste;
-import com.example.dev.logobin.model.Model_All;
-import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -54,53 +44,68 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 public class Brand_View extends FragmentView {
 
-    String Factory_Id,Url_ImageBrand,SRate;
-    RecyclerView recyclerView_Kala;
-    RecyclerKala Adapter;
+    private String Factory_Id,Url_ImageBrand,SRate;
+    private RecyclerView recyclerView_Kala;
+    private RecyclerKala Adapter;
+
+    private RecyclerView.LayoutManager layoutManager;
+
+    private RecyclerView recyclerViewDaste;
+    private Adapter_Daste_Brand Adapter_Daste;
+
+    private GetKala getKala;
+
+    private GetDastebandi getDastebandi;
 
 
+    private ArrayList<M_Kala> list_Kala;
+    private ArrayList<M_ZirDaste> list_Daste;
 
-    RecyclerView.LayoutManager layoutManager;
+    private FrameLayout rate , Logo_Smal;
+    private ImageView smallLogo;
 
-    DB_Kala db_kala;
-    DB_ZirDaste db_zirDaste;
-    ProgressDialog progressDialog;
+    private LayoutAnimationController controller;
 
+    private int load;
+    private String zirdaste_Id;
+    private boolean endless =true ;
+    private boolean getdata =true ;
 
-    ArrayList<M_Kala> fulllistkala;
-    Handler handler;
+    private AppBarLayout barLayout;
+    private Dialog dialog;
 
-    RecyclerView recyclerViewDaste;
-    Adapter_Daste_Brand Adapter_Daste;
-
-    GetKala getKala;
-
-    GetDastebandi getDastebandi;
-
-
-    ArrayList<M_Kala> list_Kala;
-    ArrayList<M_ZirDaste> list_Daste;
-
-    FrameLayout rate;
-    ImageView smallLogo;
-
-    int GetNumData =0 , i =0 ,currentItems,totalItem,scrollOutItem ;
-
+    private User_Data user_data;
+    private ImageView bezoodiloading;
+    private RelativeLayout bezoodi;
 
     @Override
     public void OnCreate() {
         View view = LayoutInflater.from(Activity).inflate(R.layout.fragment_brand2,null);
+        barLayout =(AppBarLayout)view.findViewById(R.id.appbar_brand) ;
+        barLayout.setVisibility(View.INVISIBLE);
+        bezoodi=(RelativeLayout) view.findViewById(R.id.Brand_Relative_bezoodi);
+        bezoodiloading=(ImageView) view.findViewById(R.id.loading_bezoodi);
+        DrawableImageViewTarget target = new DrawableImageViewTarget(bezoodiloading);
+        Glide.with(Activity)
+                .load(R.drawable.loader)
+                .into(target);
+
+        bezoodi.setVisibility(View.GONE);
+        Create_Alert create_alert=new Create_Alert(Activity);
+
+        dialog=create_alert.createAlert_Load();
+        dialog.show();
+
+
+
         Factory_Id=getArguments().getString("Factory_id");
         Url_ImageBrand=getArguments().getString("Url_Image");
         SRate=getArguments().getString("Rate");
+        list_Kala=new ArrayList<>();
 
-//        db_kala= new DB_Kala(Activity);
-//        db_zirDaste=new DB_ZirDaste(Activity);
-//
-//        fulllistkala=new ArrayList<>();
-//        list_Daste= new ArrayList<>();
-//
-//        handler=new Handler();
+        user_data=new User_Data(Activity);
+
+//        Toast.makeText(Activity, ""+Factory_Id , Toast.LENGTH_SHORT).show();
 
         getDastebandi=new GetDastebandi(Activity);
 
@@ -111,130 +116,57 @@ public class Brand_View extends FragmentView {
         recyclerViewDaste.setHasFixedSize(true);
 
         recyclerView_Kala = (RecyclerView) view.findViewById(R.id.Brand_Recyclerview);
+        recyclerView_Kala.setVisibility(View.GONE);
         recyclerView_Kala.setNestedScrollingEnabled(true);
-        layoutManager = new GridLayoutManager(Activity,2, LinearLayoutManager.VERTICAL,false);
+        layoutManager = new GridLayoutManager(Activity,2, LinearLayout.VERTICAL,false);
         recyclerView_Kala.setLayoutManager(layoutManager);
         recyclerView_Kala.setHasFixedSize(true);
+
+
+        controller  = AnimationUtils.loadLayoutAnimation(Activity,R.anim.recycler_fall_down_layout);
+
 
 
 
         getDastebandi.zirdastebrand(Factory_Id, new GetDastebandi.callback() {
             @Override
             public void onsuccess(ArrayList<M_ZirDaste> listss) {
-                String one= listss.get(0).getId();
-                getKala.getKala(Factory_Id, one, new GetKala.vcallback() {
-                    @Override
-                    public void onSuccess(ArrayList<M_Kala> list) {
-                        Adapter=new RecyclerKala(Activity, list, new RecyclerKala.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(M_Kala model) {
-                                Toast.makeText(Activity, ""+model.getId(), Toast.LENGTH_SHORT).show();
-                                Kala_View kala_view=new Kala_View();
-                                Bundle bundle =new Bundle();
-                                bundle.putString("ImageKala",model.getImage());
-                                bundle.putString("NameKala",model.getTitle());
-                                kala_view.setArguments(bundle);
-
-                                Activity.GetManager().OpenView(kala_view,"Kala_View",true);
-                            }
-                        });
-                        recyclerView_Kala.setAdapter(Adapter);
-                        Adapter.notifyDataSetChanged();
-                    }
-                });
-                Adapter_Daste=new Adapter_Daste_Brand(listss, new Adapter_Daste_Brand.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(M_ZirDaste m_zirDaste) {
-
-                        Toast.makeText(Activity, ""+m_zirDaste.getId(), Toast.LENGTH_SHORT).show();
-                        getKala.getKala(Factory_Id,m_zirDaste.getId(), new GetKala.vcallback() {
-                            @Override
-                            public void onSuccess(ArrayList<M_Kala> list) {
-                                Adapter=new RecyclerKala(Activity, list, new RecyclerKala.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(M_Kala model) {
-                                        Toast.makeText(Activity, ""+model.getId(), Toast.LENGTH_SHORT).show();
-                                        Kala_View kala_view=new Kala_View();
-                                        Bundle bundle =new Bundle();
-                                        bundle.putString("ImageKala",model.getImage());
-                                        bundle.putString("NameKala",model.getTitle());
-                                        kala_view.setArguments(bundle);
-
-                                        Activity.GetManager().OpenView(kala_view,"Kala_View",true);
-                                    }
-                                });
-                                recyclerView_Kala.setAdapter(Adapter);
-                                Adapter.notifyDataSetChanged();
-
-                            }
-                        });
-
-                    }
-                });
-                recyclerViewDaste.setAdapter(Adapter_Daste);
+                if (listss.size()==0){
+                    Toast.makeText(Activity, "اطلاعاتت در حال تکمیل میباشد ... ", Toast.LENGTH_SHORT).show();
+                    barLayout.setVisibility(View.VISIBLE);
+                    bezoodi.setVisibility(View.VISIBLE);
+                    dialog.dismiss();
+                }else  {
+                    zirdaste_Id = listss.get(0).getId();
+                    load = 0;
+                    setUpRecyclerKala(zirdaste_Id, load);
+                    Adapter_Daste = new Adapter_Daste_Brand(listss, new Adapter_Daste_Brand.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(M_ZirDaste m_zirDaste) {
+                            zirdaste_Id = m_zirDaste.getId();
+//                            Toast.makeText(Activity, "Id =" + m_zirDaste.getId(), Toast.LENGTH_SHORT).show();
+                            endless = true;
+                            load = 0;
+                            list_Kala.clear();
+                            recyclerView_Kala.setAdapter(Adapter);
+                            setUpRecyclerKala(zirdaste_Id, load);
 
 
+                        }
+                    });
+                    recyclerViewDaste.setAdapter(Adapter_Daste);
+
+                }
+            }
+
+            @Override
+            public void faild(String eror) {
+                Toast.makeText(Activity, "Api DasteBandi Error", Toast.LENGTH_SHORT).show();
             }
         });
 
 
 
-//        handler.postDelayed(runnable,0);
-
-
-//        progressDialog = new ProgressDialog(Activity);
-//        progressDialog.setMessage("Fetching The File....");
-//        progressDialog.show();
-
-
-
-
-
-//        list_Kala=new ArrayList<>();
-
-
-
-//
-//        recyclerView_Kala.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//
-//                totalItem=layoutManager.getItemCount();
-//                currentItems=layoutManager.getChildCount();
-//                scrollOutItem=((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-//                Log.i("Scroll == ","Total = "+totalItem+"=="+currentItems+"-"+scrollOutItem);
-//
-//                if (totalItem-5 <= currentItems+scrollOutItem ){
-//                    Log.i("I= kala",GetNumData+"="+(db_kala.getData().size()-1));
-//                    if (GetNumData >= db_kala.getData().size()-1) {
-//                        Toast.makeText(Activity, "Payane List", Toast.LENGTH_SHORT).show();
-//
-//
-//                     }else if (
-////                             GetNumData < db_kala.getData().size()-1
-//                            totalItem <=scrollOutItem+currentItems+20
-//                            ){
-////                        getkalalist(GetNumData);
-//                        Log.i("Num data ? ",GetNumData+"-"+db_kala.getData().size());
-//                        Log.i("i == db kala? ",i+"-"+db_kala.getData().size());
-//                    }
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//            }
-//        });
-
-
-
-
-
-
-//        setUpList();
 
         CollapsingToolbarLayout colaps=view.findViewById(R.id.collapsing_toolbar);
         colaps.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
@@ -246,20 +178,20 @@ public class Brand_View extends FragmentView {
             }
         });
         smallLogo=(ImageView)view.findViewById(R.id.Brand_Imageview_smallLogo);
-        Picasso.get().load(Url_ImageBrand).into(smallLogo);
-        final AppBarLayout appbar=(AppBarLayout) view.findViewById(R.id.appbar);
-        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+        Logo_Smal=(FrameLayout)view.findViewById(R.id.Brand_Frame_smalLogo) ;
+        Picasso.get().load(Url_ImageBrand).resize(100,100).into(smallLogo);
+        barLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                float offsetAlpha = (appBarLayout.getY() / appbar.getTotalScrollRange());
+                float offsetAlpha = (appBarLayout.getY() / barLayout.getTotalScrollRange());
 //                rate.setAlpha( 0 + (offsetAlpha * -1));
                 smallLogo.setAlpha( 0 + (offsetAlpha * -1));
+                Logo_Smal.setAlpha( 0 + (offsetAlpha * -1));
 //                Log.i("ofset",""+offsetAlpha);
             }
         });
 
-        Toolbar toolbar=(Toolbar)view.findViewById(R.id.z_toolbar);
-        LinearLayout back=(LinearLayout) view.findViewById(R.id.Brand_Imageview_Back);
+        FrameLayout back=(FrameLayout) view.findViewById(R.id.Brand_Imageview_Back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -268,7 +200,6 @@ public class Brand_View extends FragmentView {
         });
 
 
-        Transformation transformation=new RoundedTransformationBuilder().cornerRadiusDp(20).build();
         ImageView heder = (ImageView) view.findViewById(R.id.Brand_Imageview_Heder);
         heder.setScaleType(ImageView.ScaleType.FIT_XY);
         Picasso.get().load(Url_ImageBrand).into(heder);
@@ -281,9 +212,11 @@ public class Brand_View extends FragmentView {
             @Override
             public void onClick(View v) {
                 final Dialog dialog=new Dialog(Activity);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.setContentView(R.layout.z_m_alertdialog_rating);
-                Button sabt = (Button)dialog.findViewById(R.id.AlertRate_Button_Sabt);
+                Objects.requireNonNull(dialog.getWindow()).setDimAmount(0.1f);
+                TextView sabt = (TextView) dialog.findViewById(R.id.AlertRate_Button_Sabt);
                 final TextView rate=(TextView)dialog.findViewById(R.id.z_m_rating_textview) ;
                 final String[] s = {null};
                 final MaterialRatingBar materialRatingBar=(MaterialRatingBar) dialog.findViewById(R.id.z_m_rating_ratingbar);
@@ -291,13 +224,23 @@ public class Brand_View extends FragmentView {
                 materialRatingBar.setOnRatingChangeListener(new MaterialRatingBar.OnRatingChangeListener() {
                     @Override
                     public void onRatingChanged(MaterialRatingBar ratingBar, float rating) {
-                        rate.setText(String.valueOf(rating));
+                        if (rating >=1f) {
+                            rate.setText(String.valueOf(rating));
+                        }
+                        if (rating < 1.0f){
+//                    materialRatingBar.setRating(1f);
+                            ratingBar.setRating(1.0f);
+                            Log.i("Rating",rating+"");
+                        }
                     }
                 });
                 sabt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(Activity, "امتیاز شما "+ String.valueOf(materialRatingBar.getRating()) +" ثبت شد.", Toast.LENGTH_SHORT).show();
+                        PostBrand postBrand= new PostBrand(Activity);
+
+                        postBrand.Post_Rate_Brand(user_data.getUser_id(),Factory_Id,rate.getText().toString());
+                        Toast.makeText(Activity, "امتیاز شما "+ rate.getText().toString() +" ثبت شد.", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });
@@ -307,144 +250,65 @@ public class Brand_View extends FragmentView {
 
 
 
-//        list_Daste.add(new M_ZirDaste(null,"همه موارد",null));
-//        Adapter_Daste=new Adapter_Daste_Brand(list_Daste, new Adapter_Daste_Brand.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(M_ZirDaste m_zirDaste) {
-//                Toast.makeText(Activity, ""+m_zirDaste.getId(), Toast.LENGTH_SHORT).show();
-//                list_Kala.clear();
-//                for (int i = 0 ; i<fulllistkala.size();i++){
-//                    if (fulllistkala.get(i).getSublist_id().equals(m_zirDaste.getId())){
-//                        list_Kala.add(new M_Kala(fulllistkala.get(i).getId(),
-//                                fulllistkala.get(i).getTitle(),
-//                                fulllistkala.get(i).getCprice(),
-//                                fulllistkala.get(i).getCode(),
-//                                fulllistkala.get(i).getDetails(),
-//                                fulllistkala.get(i).getImage(),
-//                                fulllistkala.get(i).getActive(),
-//                                fulllistkala.get(i).getFactory_id(),
-//                                fulllistkala.get(i).getList_id(),
-//                                fulllistkala.get(i).getSublist_id()));
-//
-//                    }
-//                }
-//                Adapter.notifyDataSetChanged();
-//
-//            }
-//        });
-
-
 
 
 
         ViewMain=view;
     }
 
-//    private void getkalalist(int get){
-//
-//
-//        for (int i = get ; i<fulllistkala.size();i++){
-//            if (i == get + 50) {
-//                i++;
-//                GetNumData = i;
-//                Toast.makeText(Activity, "" + GetNumData, Toast.LENGTH_SHORT).show();
-//                i = fulllistkala.size();
-//
-//
-//
-//            } else {
-//                list_Kala.add(new M_Kala(fulllistkala.get(i).getId(),
-//                        fulllistkala.get(i).getTitle(),
-//                        fulllistkala.get(i).getCprice(),
-//                        fulllistkala.get(i).getCode(),
-//                        fulllistkala.get(i).getDetails(),
-//                        fulllistkala.get(i).getImage(),
-//                        fulllistkala.get(i).getActive(),
-//                        fulllistkala.get(i).getFactory_id(),
-//                        fulllistkala.get(i).getList_id(),
-//                        fulllistkala.get(i).getSublist_id()));
-//                GetNumData = i;
-//                Adapter.notifyDataSetChanged();
-//            }
-//        }
-//
-//        if (progressDialog.isShowing()){
-//            progressDialog.dismiss();
-//        }
-//
-//    }
-//
-//
-//    public void setUpList(){
-//
-//        for (int i = 0 ; i<fulllistkala.size();i++){
-//           ArrayList<M_ZirDaste> gettitel=new ArrayList<>(db_zirDaste.getname(fulllistkala.get(i).getSublist_id()));
-//
-//           adddaste(gettitel.get(0).getId(),
-//                   gettitel.get(0).getTitle(),
-//                   gettitel.get(0).getList_id());
-//
-//        }
-//
-//    }
-//
-//    private void adddaste(String id,String matn,String sublist){
-//        int bood=0;
-//        int naboood=0;
-//        for (int i = 0 ; i < list_Daste.size();i++){
-//
-//
-//            if (list_Daste.get(i).getTitle().equals(matn)){
-//                bood++;
-//            }else {
-//                naboood++;
-//            }
-//        }
-//        if (bood+naboood==naboood-bood) {
-//            Log.i("matndaste hast",i+" Hast "+list_Daste.size()+"  bood= "+bood+"  nabood = "+naboood );
-//            list_Daste.add(new M_ZirDaste(id,matn,sublist));
-//            Adapter_Daste.notifyDataSetChanged();
-//        }
-//    }
-//
-//    int sizedbkala ;
-//    public Runnable runnable = new Runnable() {
-//        @Override
-//        public void run() {
-//            Log.i("Run", sizedbkala+"test" + db_kala.getData().size());
-//
-//
-//
-////            if (sizedbkala != db_kala.getData().size()) {
-//                sizedbkala=db_kala.getData().size();
-//                handler.postDelayed(runnable,100);
-//
-//            }
-//            else if ( db_kala.getData().size() == sizedbkala && sizedbkala != 0){
-//
-//                fulllistkala.addAll(db_kala.getData());
-//                Log.i("Run", fulllistkala.size()+"true data ==" + db_kala.getData().size());
-//                getkalalist(GetNumData);
-//                recyclerView_Kala.setVisibility(View.VISIBLE);
-//                recyclerView_Kala.setAdapter(Adapter);
-//                setUpList();
-//                handler.removeCallbacks(runnable);
-//            }
-//            else {
-//                Log.i("Run","false");
-//                handler.postDelayed(runnable,100);
-//
-//            }
-//        }
-//    } ;
+    private void setUpRecyclerKala(String IdZirDaste,int loading){
+        getKala.getKala_Brand(Factory_Id, IdZirDaste,user_data.getMahale(), loading, new GetKala.vcallback() {
+            @Override
+            public void onSuccess(ArrayList<M_Kala> list) {
+                //                Toast.makeText(Activity, "Total item to Load = "+list.size(), Toast.LENGTH_SHORT).show();
+//                if (list.size()==0){
+//                    endless=false;
+//                }
+//                Toast.makeText(Activity, "Add kala back", Toast.LENGTH_SHORT).show();
+                list_Kala.addAll(list);
+                Adapter=new RecyclerKala(Activity, list_Kala,Activity, new RecyclerKala.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(M_Kala model) {
+//                        Toast.makeText(Activity, ""+model.getId(), Toast.LENGTH_SHORT).show();
+                        Kala_View kala_view=new Kala_View();
+
+                        Bundle bundle =new Bundle();
+                        bundle.putString("ID_kala",model.getId());
+                        bundle.putString("ID_mahale",user_data.getMahale());
+                        bundle.putString("ImageKala",model.getImage());
+                        bundle.putString("NameKala",model.getTitle());
+                        kala_view.setArguments(bundle);
+
+                        Activity.GetManager().OpenView(kala_view,"Kala_View",true);
+                    }
+                });
+//                if (load == 0) {
+                recyclerView_Kala.setAdapter(Adapter);
+//                    recyclerView_Kala.setLayoutAnimation(controller);
+//                }
+
+                Adapter.notifyDataSetChanged();
+                dialog.dismiss();
+                barLayout.setVisibility(View.VISIBLE);
+                recyclerView_Kala.setVisibility(View.VISIBLE);
+//                getdata=true
+            }
+
+            @Override
+            public void faild(String Eror) {
+                Toast.makeText(Activity, "Kala daryaft nashod", Toast.LENGTH_SHORT).show();
+                Log.i("Kala_get_eror",Eror);
+                dialog.dismiss();
+                Activity.onBackPressed();
+            }
+        });
+    }
 
 
 
     @Override
     public void OnResume() {
         super.OnResume();
-
-
     }
 
 }

@@ -1,318 +1,296 @@
 package com.example.dev.logobin.home;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.support.v4.view.ViewPager;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
+import android.view.View;
+import android.widget.Toast;
+
+
+import com.example.dev.logobin.Network.GetHome;
 import com.example.dev.logobin.R;
 import com.example.dev.logobin.fragment.FragmentView;
 import com.example.dev.logobin.handel.DB_Brand;
+import com.example.dev.logobin.handel.DB_Sherkat;
 import com.example.dev.logobin.handel.Main_Adapter;
-import com.example.dev.logobin.handel.ImageSlider;
+import com.example.dev.logobin.handel.Navbotton;
+import com.example.dev.logobin.handel.User_Data;
 import com.example.dev.logobin.model.M_Brand;
+import com.example.dev.logobin.model.M_Home;
+import com.example.dev.logobin.model.M_Sherkat;
 import com.example.dev.logobin.model.Model_All;
-import com.example.dev.logobin.model.Model_Brand;
 import com.example.dev.logobin.model.Model_ImageSlider;
 import com.example.dev.logobin.model.Model_RecyclerHorizemtal;
+import com.example.dev.logobin.ui.Sherkat_View;
 
 import java.util.ArrayList;
 
 public class Safheasli extends FragmentView {
 
 
-    //Imageslider
-     private ViewPager slidertop;
-     private ImageSlider adapter_Imageslider;
-     private Runnable runnable;
-     private int page;
-     private ArrayList<Model_ImageSlider> listimage;
-     //RecyclerBrand
-    private ArrayList<Model_All> list_Brand;
-    private RecyclerView recyclerView_Brand;
-    //Recycler_Sherkat
-    private ArrayList<Model_All> list_Sherkat;
-    private RecyclerView recyclerView_Sherkat;
-    //Recycler_Kala
-    private ArrayList<Model_All> list_Kala;
-    private RecyclerView recyclerView_Kala;
-    //RecyclerAsli
+    private ArrayList<M_Home> list_home;
+
     private RecyclerView recyclerView_Vertical;
     private ArrayList<Model_RecyclerHorizemtal> list_Vertical;
-    //OnclickItem
-    private ArrayList<Model_All> list_tablighat;
+
+    private int dastebandi;
+    private boolean swp = false;
+
+    private SwipeRefreshLayout refreshLayout;
 
 
-    private DB_Brand db_brand;
-    private M_Brand m_brand;
     private Main_Adapter.Adaprer_RecyclerVertical adapterVertical;
+
+    private Navbotton navbotton;
+
+    private String id_sherkat;
 
     @Override
     public void OnCreate() {
 
+        Log.i("Life","OnCreate");
         View view=View.inflate(Activity, R.layout.home_safheasli_ui,null);
-        init(view);
+//        init(view);
+        recyclerView_Vertical=(RecyclerView) view.findViewById(R.id.safheasli_Recyclerview_Asli);
+        refreshLayout=(SwipeRefreshLayout) view.findViewById(R.id.swip_refresh_home);
 
-        db_brand=new DB_Brand(Activity);
-        ArrayList<M_Brand> databrand=new ArrayList<>(db_brand.getData());
-        list_Brand=new ArrayList<>();
-        for (int i = 0 ; databrand.size()>i ;i++){
-            Log.i("titel",databrand.get(i).getTitle());
-            list_Brand.add(new Model_All("Brand_R",
-                    String.valueOf(databrand.get(i).getId()),
-                    databrand.get(i).getImage(),
-                    databrand.get(i).getTitle(),
-                    databrand.get(i).getRate()
-                    ));
+        navbotton=new Navbotton(Activity);
+
+        list_home =new ArrayList<>();
+        list_Vertical=new ArrayList<>();
+
+        Bundle extra = getArguments();
+        list_home= extra.getParcelableArrayList("listhome");
+        dastebandi=extra.getInt("NumDaste")+1;
+
+        if (extra.getString("ID") != null){
+            id_sherkat=extra.getString("ID");
         }
 
 
 
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(Activity,LinearLayoutManager.VERTICAL,false);
+        layoutManager.setAutoMeasureEnabled(true);
+        recyclerView_Vertical.setLayoutManager(layoutManager);
+        adapterVertical=new Main_Adapter.Adaprer_RecyclerVertical(list_Vertical,Activity,Activity);
+        recyclerView_Vertical.setHasFixedSize(true);
+        recyclerView_Vertical.setNestedScrollingEnabled(false);
 
-//        getdatafromserver();
+        getlistpars(list_home,dastebandi);
 
-        getlistDATABASE();
-        setUp_Imageslider();
-        setUp_Recycler_Vertical();
+        recyclerView_Vertical.setAdapter(adapterVertical);
+
+
+
+
+
+
+
+
+
+
+
+
+        refreshLayout.setColorSchemeColors(
+               Activity.getResources().getColor(R.color.c500),
+               Activity.getResources().getColor(R.color.c400),
+               Activity.getResources().getColor(R.color.c300),
+               Activity.getResources().getColor(R.color.c600)
+        );
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                GetHome getHome=new GetHome(Activity);
+                User_Data user_data=new User_Data(Activity);
+                getHome.getHome(user_data.getMahale(), new GetHome.Back_Brand() {
+                    @Override
+                    public void ok(ArrayList<M_Home> brands, int NnbDaste) {
+//                        list_home.clear();
+                        list_Vertical.clear();
+//                        adapterVertical.notifyDataSetChanged();
+//                        list_home.addAll(brands);
+                        swp=true;
+                        getlistpars(brands,NnbDaste+1);
+
+
+
+
+                        refreshLayout.setRefreshing(false);
+
+                    }
+
+                    @Override
+                    public void faild(String Error) {
+                        Toast.makeText(Activity, "اتصال به سرور ممکن نیست...", Toast.LENGTH_SHORT).show();
+                        refreshLayout.setRefreshing(false);
+
+                    }
+                });
+
+            }
+        });
+
+
+
+
 
         ViewMain=view;
 
-    }
-    private void getlistDATABASE(){
-        listimage =new ArrayList<>();
 
-        listimage.add(new Model_ImageSlider(R.drawable.baner1,"GotoBaner1"));
-        listimage.add(new Model_ImageSlider(R.drawable.baner2,"GotoBaner2"));
-        listimage.add(new Model_ImageSlider(R.drawable.baner1,"GotoBaner1"));
-        listimage.add(new Model_ImageSlider(R.drawable.baner3,"GotoBaner3"));
-
-//        list_Brand=new ArrayList<>();
-
-
-
-//        list_Brand.add(new Model_All("Brand_R",R.drawable.b_domino,"دومینو","3.7"));
-//        list_Brand.add(new Model_All("Brand_R",R.drawable.b_haraz,"هراز","4.7"));
-//        list_Brand.add(new Model_All("Brand_R",R.drawable.b_chitoz,"چیتوز","4.5"));
-//        list_Brand.add(new Model_All("Brand_R",R.drawable.b_behrooz,"بهروز","3.7"));
-//        list_Brand.add(new Model_All("Brand_R",R.drawable.b_damdaran,"دامداران","4.1"));
-//        list_Brand.add(new Model_All("Brand_R",R.drawable.b_domino,"دومینو","3.7"));
-//        list_Brand.add(new Model_All("Brand_R",R.drawable.b_haraz,"هراز","4.7"));
-//        list_Brand.add(new Model_All("Brand_R",R.drawable.b_chitoz,"چیتوز","4.5"));
-//        list_Brand.add(new Model_All("Brand_R",R.drawable.b_behrooz,"بهروز","3.7"));
-//        list_Brand.add(new Model_All("Brand_R",R.drawable.b_damdaran,"دامداران","4.1"));
-
-
-        list_Sherkat=new ArrayList<>();
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_alborz,"البرز","2.5"));
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_banian,"بانیان","3"));
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_karen,"کارن","4.7"));
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_mazrae,"مزرعه","3.9"));
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_pardis,"پردیس","4"));
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_ronak,"روناک","4.1"));
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_alborz,"البرز","2.5"));
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_banian,"بانیان","3"));
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_karen,"کارن","4.7"));
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_mazrae,"مزرعه","3.9"));
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_pardis,"پردیس","4"));
-        list_Sherkat.add(new Model_All("Sherkat_R",R.drawable.sh_ronak,"روناک","4.1"));
-
-        list_Kala=new ArrayList<>();
-
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala1,"پنیر کاله"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala2,"ماست دامداران"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala3,"ماست دامداران"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala4,"ماست دامداران"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala5,"شیر دامداران"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala6,"شیر دامداران"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala7,"پنیر خامه ای دامداران"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala1,"پنیر کاله"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala2,"ماست دامداران"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala3,"ماست دامداران"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala4,"ماست دامداران"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala5,"شیر دامداران"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala6,"شیر دامداران"));
-//        list_Kala.add(new Model_All("Kala_G",R.drawable.kala7,"پنیر خامه ای دامداران"));
-
-        list_tablighat=new ArrayList<>();
-        list_tablighat.add(new Model_All("Recycler_Tabligh",R.drawable.baner4));
-
-        list_Vertical=new ArrayList<>();
-        list_Vertical.add(new Model_RecyclerHorizemtal("Home","برترین برند های غذایی",list_Brand));
-        list_Vertical.add(new Model_RecyclerHorizemtal("Home","برترین تامین کنندگان",list_Sherkat));
-        list_Vertical.add(new Model_RecyclerHorizemtal("Tabligh",list_tablighat));
-        list_Vertical.add(new Model_RecyclerHorizemtal("Home","برترین برند های غذایی",list_Brand));
-        list_Vertical.add(new Model_RecyclerHorizemtal("Home","برترین شرکت های پخش",list_Sherkat));
-        list_Vertical.add(new Model_RecyclerHorizemtal("Tabligh",list_tablighat));
 
 
 
     }
 
-    private void init(View view){
-        slidertop=(ViewPager)view.findViewById(R.id.Safheasli_Viewpager_SliderTop);
-        recyclerView_Vertical=(RecyclerView) view.findViewById(R.id.safheasli_Recyclerview_Asli);
+    private void getlistpars(ArrayList<M_Home> list, int daste){
 
+
+        if (list != null) {
+            int i;
+//            int find=extra.getInt("NumDaste");
+            for (i = 1 ; i<daste ; i++) {
+                ArrayList<M_Home> addList;
+                addList=new ArrayList<>();
+                int end_b=0;
+                String Titr_b="";
+                for (M_Home brand : list) {
+                    end_b++;
+                    if (brand.getViewv() != null && brand.getViewv().contains("brand") && brand.getPartId().contains(""+i)) {
+                        Log.i("Brand Name  "+i, brand.getTitle());
+                        Titr_b=brand.getPartTitle();
+                        addList.add(new M_Home(brand.getViewv(),
+                                brand.getPartId(),
+                                brand.getPartTitle(),
+                                brand.getId(),
+                                brand.getTitle(),
+                                brand.getImage(),
+                                brand.getRate(),
+                                brand.getState(),
+                                brand.getType()));
+                        Log.i("Tab",brand.getTitle()+" // "+brand.getState());
+                    }
+                    if (end_b == list.size()){
+                        end_b=0;
+                        Log.i("sizelist brand",i+" = "+addList.size());
+                        list_Vertical.add(new Model_RecyclerHorizemtal("Home","برند های محصولات "+Titr_b,addList));
+                    }
+
+                }
+
+                addList=new ArrayList<>();
+                int end_sh=0;
+                String Titr_sh="";
+                for (M_Home sherkat : list){
+                    end_sh++;
+                    if (sherkat.getViewv() != null && sherkat.getViewv().contains("company") && sherkat.getPartId().contains(""+i)){
+                        Log.i("sherkat Name  "+i, sherkat.getTitle());
+                        Titr_sh=sherkat.getPartTitle();
+                        addList.add(new M_Home(sherkat.getViewv(),
+                                sherkat.getPartId(),
+                                sherkat.getPartTitle(),
+                                sherkat.getId(),
+                                sherkat.getTitle(),
+                                sherkat.getImage(),
+                                sherkat.getRate(),
+                                sherkat.getState(),
+                                sherkat.getType()));
+                    }
+                    if (end_sh == list.size() && addList.size() != 0 ){
+                        end_sh=0;
+                        Log.i("sizelist sherkat",i+" = "+addList.size());
+                        list_Vertical.add(new Model_RecyclerHorizemtal("Home","تامین کنندگان محصولات "+Titr_sh,addList));
+                    }
+                    if (end_sh == list.size() && addList.size() == 0){
+                        end_sh=0;
+                        Log.i("sizelist sherkat",i+" = "+addList.size());
+                        addList.add(new M_Home("company",
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null));
+                        list_Vertical.add(new Model_RecyclerHorizemtal("Home","تامین کنندگان محصولات "+Titr_b,addList));
+                    }
+                }
+
+            }
+
+//            Toast.makeText(Activity, ""+list.size(), Toast.LENGTH_SHORT).show();
+            if (swp){
+                adapterVertical=new Main_Adapter.Adaprer_RecyclerVertical(list_Vertical,Activity,Activity);
+                recyclerView_Vertical.setAdapter(adapterVertical);
+                adapterVertical.notifyDataSetChanged();
+            }
+
+            setUp_Recycler_Vertical();
+        }
     }
+
 
     private void setUp_Recycler_Vertical (){
-        adapterVertical=new Main_Adapter.Adaprer_RecyclerVertical(list_Vertical,Activity,Activity);
-        recyclerView_Vertical.setLayoutManager(new LinearLayoutManager(Activity,LinearLayoutManager.VERTICAL,false));
-        recyclerView_Vertical.setNestedScrollingEnabled(false);
-        recyclerView_Vertical.setAdapter(adapterVertical);
+
+//        adapterVertical.swap(list_Vertical);
+//        recyclerView_Vertical.getAdapter().notifyDataSetChanged();
+        adapterVertical.notifyDataSetChanged();
+//        refreshLayout.setRefreshing(false);
 
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    private void setUp_Imageslider(){
-        //Set_Adapter
-        adapter_Imageslider=new ImageSlider(Activity,listimage);
-        slidertop.setAdapter(adapter_Imageslider);
-        slidertop.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
 
-            @Override
-            public void onPageSelected(int position) {
-
-                page=position;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        slidertop.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_OUTSIDE:
-                    case MotionEvent.ACTION_CANCEL:
-                    case MotionEvent.ACTION_POINTER_DOWN:
-                    case MotionEvent.ACTION_POINTER_UP:
-                    case MotionEvent.ACTION_MOVE:
-                        slidertop.removeCallbacks(runnable);
-                        break;
-                }
-                slidertop.postDelayed(runnable,2500);
-                return false;
-            }
-        });
-
-            //Change_Slide
-            runnable =new Runnable() {
-                @Override
-                public void run() {
-                    if (adapter_Imageslider.getCount()-1==page){
-                        page=0;
-                    }else {
-                        page++;
-                    }slidertop.setCurrentItem(page,true);
-                    slidertop.postDelayed(this,2500);
-                }
-            };
-
+    @Override
+    public void OnOpen() {
+        Log.i("Life","Open");
+        super.OnOpen();
     }
-
-//    public void getdatafromserver(){
-//
-//        String Url_Kala="http://satrapp.ir/api/brand/10";
-//        String Url_Brand="http://satrapp.ir/api/brands";
-//        JsonObjectRequest js_kala = new JsonObjectRequest(Request.Method.GET, Url_Kala, null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            JSONArray Jsa_Kala=response.getJSONArray("data");
-////                            Log.i("Brand : ",brand.toString());
-//                            for (int i =0 ;i<Jsa_Kala.length();i++){
-//                                JSONObject Kala=Jsa_Kala.getJSONObject(i);
-//                                String id = Kala.getString("id");
-//                                String title = Kala.getString("title");
-//                                String cprice = Kala.getString("cprice");
-//                                String code = Kala.getString("code");
-//                                String details = Kala.getString("details");
-//                                String image = Kala.getString("image");
-//                                String active = Kala.getString("active");
-//                                String factory_id = Kala.getString("factory_id");
-//                                String list_id = Kala.getString("list_id");
-//                                String sublist_id = Kala.getString("sublist_id");
-//
-//                            }
-//
-//                        }catch (JSONException e){
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        });
-//
-//        final JsonObjectRequest js_brand=new JsonObjectRequest(Request.Method.GET, Url_Brand, null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            JSONArray Jsa_Brand=response.getJSONArray("data");
-//                            Log.i("Brand : ",Jsa_Brand.toString());
-//
-//                            for (int i =0 ;i<Jsa_Brand.length();i++){
-//                                JSONObject Brand=Jsa_Brand.getJSONObject(i);
-//                                String id = Brand.getString("id");
-//                                String title = Brand.getString("title");
-//                                String image = Brand.getString("image");
-//                                String rate = Brand.getString("rate");
-//                                String url_Image="http://satrapp.ir"+image;
-//
-//                                list_Brand.add(new Model_All("Brand_R",id,url_Image,title,rate));
-//
-//
-//
-//
-//                            }
-//
-//
-//                        }catch (JSONException e){
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        });
-//
-//        getdata.add(js_kala);
-//        getdata.add(js_brand);
-//
-//    }
 
     @Override
     public void OnResume() {
+//        setUp_Recycler_Vertical();
+        Log.i("Life","OnResume");
+        navbotton.settview(Tag);
+
+
+        final Handler handler = new Handler();
+
+        final Runnable r = new Runnable() {
+            public void run() {
+                Log.i("Go sherkat","get Bundel"+id_sherkat);
+                if (id_sherkat != null){
+                    Log.i("Go sherkat","send Bundel"+id_sherkat);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ID", id_sherkat);
+                    Sherkat_View sherkat_view = new Sherkat_View();
+                    sherkat_view.setArguments(bundle);
+                    Activity.GetManager().OpenView(sherkat_view, "Sherkat_View", true);
+                    id_sherkat=null;               }
+
+            }
+        };
+
+        handler.postDelayed(r, 1000);
+
+
+
+
         super.OnResume();
-        slidertop.postDelayed(runnable,2000);
     }
 
     @Override
     public void OnPause() {
         super.OnPause();
-        slidertop.removeCallbacks(runnable);
+        Log.i("Life","OnPause");
+
+
     }
 }
 
